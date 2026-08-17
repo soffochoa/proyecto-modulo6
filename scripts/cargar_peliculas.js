@@ -1,7 +1,13 @@
 var db = db.getSiblingDB("proyecto_peliculas");
 var destino = db.peliculas;
 
-var contenido = cat("datos/peliculas.json");
+//  cat() 
+var contenido;
+if (typeof cat === "function") { 
+  contenido = cat("datos/peliculas.json");
+} else { 
+  contenido = require("fs").readFileSync("datos/peliculas.json", "utf8");
+} 
 var documentos = JSON.parse(contenido);
 
 print("Documentos leídos del JSON: " + documentos.length);
