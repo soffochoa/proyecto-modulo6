@@ -247,9 +247,51 @@ películas que se estrenan a fin de año buscando el Oscar.
 estudios eligen esas fechas, y una calificación más alta en un mes no
 significa que estrenar ahí "cause" mejores películas.
 
----
 
 
 ## 8. Alcances, limitaciones y posibles mejoras
 
-(pendiente)
+## 8. Alcances, limitaciones y posibles mejoras
+
+**Lo que el proyecto sí permite describir:**
+- Cómo se comportan la calificación promedio, la cantidad de estrenos y la duración de
+  las películas a lo largo de casi 20 años, agrupando por género, año, década o mes.
+- Patrones generales del catálogo de IMDb en ese periodo: por ejemplo, que el número de
+  películas creció bastante entre 2000 y 2019, que octubre concentra más estrenos, o que
+  la duración promedio subió más después de 2011.
+
+**Lo que no permite afirmar:**
+- No demuestra causalidad. Que la duración baje en 2008-2010 o que diciembre tenga
+  mejor calificación no prueba que exista una causa directa detrás, solo se ve la
+  coincidencia en el tiempo.
+- No es una muestra representativa de "todo el cine" ni de la opinión del público en
+  general. Son las películas que están en IMDb y las calificaciones de quien decide
+  votar ahí, que no es lo mismo que el público completo.
+- No sirve para predecir qué va a pasar después de 2019, porque el dataset no llega más
+  allá de esa fecha y 20 puntos anuales no alcanzan para proyectar una tendencia futura.
+- Los géneros con pocas películas por grupo (como `Sport`, `Music` o `Western`) dan
+  resultados poco confiables, un cambio de 2-3 películas puede mover el porcentaje
+  muchísimo aunque no signifique nada real.
+
+**Limitaciones del dataset y del modelo:**
+- El dataset cubre 2000-2020, pero nosotros usamos 2000-2019 porque 2020 estaba
+  incompleto (pocas películas capturadas ese año).
+- La Pregunta 2 compara solo dos años puntuales (2000 y 2019), no toda la serie
+  completa; un género pudo haber subido y bajado varias veces en medio y eso no se ve
+  en esta comparación.
+- `avg_vote` es un promedio que ya viene calculado desde IMDb, no tenemos el detalle de
+  cuántas personas votaron cada película ni su distribución, solo el número total de
+  votos.
+- Una película puede tener varios géneros a la vez (usamos `$unwind` para eso), así que
+  una misma película se cuenta en más de un grupo, esto es correcto para responder
+  "cuánto pesa cada género", pero significa que las cuentas por género no sí se pueden
+  sumar entre sí para dar el total de películas.
+
+**Posibles mejoras a futuro:**
+- Extender el rango de años, cuando haya un dataset más actualizado, para ver qué pasó
+  después de 2020.
+- Cruzar esta colección con datos de taquilla o presupuesto (el dataset original trae
+  `budget` y `worlwide_gross_income`, que no usamos), para relacionar calificación con
+  éxito comercial.
+- Comparar contra otra fuente de calificaciones (como Rotten Tomatoes o Letterboxd) para
+  ver si el patrón se sostiene fuera de IMDb.
