@@ -5,7 +5,6 @@ ENTRADA = "datos/IMDB Movies 2000 - 2020.csv"
 SALIDA = "datos/peliculas.json"
 
 def convertir_fecha(texto):
-    # Formato esperado: DD/MM/YYYY
     if not texto:
         return None
     partes = texto.split("/")

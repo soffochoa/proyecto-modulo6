@@ -1,7 +1,6 @@
 var db = db.getSiblingDB("proyecto_peliculas");
 var destino = db.peliculas;
 
-//  cat() 
 var contenido;
 if (typeof cat === "function") { 
   contenido = cat("datos/peliculas.json");
